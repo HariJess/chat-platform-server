@@ -26,6 +26,13 @@ export async function getMessages(roomID: string) {
   return rows;
 }
 
+export async function getAllMessages() {
+  const query = `SELECT *
+                FROM CHAT_MESSAGES`;
+  const [rows] = await pool.query(query);
+  return rows;
+}
+
 export async function sendMessages(message: MessageData) {
   const { roomID, content, userID, type, timeStamp, fileMessage } = message;
 

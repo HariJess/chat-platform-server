@@ -9,6 +9,7 @@ import multer from "multer";
 import { getRoomsHandler } from "./routes/rooms";
 import { createRoomHandler } from "./routes/rooms";
 import { getMessagesHandler } from "./routes/messages";
+import { getAllMessagesHandler } from "./routes/messages";
 import { sendMessagesHandler } from "./routes/messages";
 import { deleteMessagesHandler } from "./routes/messages";
 import { getMembersHandler } from "./routes/members";
@@ -154,6 +155,7 @@ app.post(
   sendMessagesHandler
 );
 app.get("/api/chat/messages", getMessagesHandler);
+app.get("/api/chat/messages/all", getAllMessagesHandler);
 app.post("/api/chat/messages/delete", upload.none(), deleteMessagesHandler);
 
 // demarrage du serveur

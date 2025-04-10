@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import { getMessages } from "../services/messages";
+import { getAllMessages } from "../services/messages";
 import { sendMessages } from "../services/messages";
 import { deleteMessages } from "../services/messages";
 
@@ -19,6 +20,29 @@ export async function getMessagesHandler(
     }
 
     const messages = await getMessages(roomID);
+    console.log(
+      "La récupération des messages de la room specifique a reussi :",
+      messages
+    );
+
+    res.status(201).json(messages);
+  } catch (error) {
+    console.error(
+      "Erreur lors de la récupération des messages de la room specifique :",
+      error
+    );
+    next(error);
+    res.status(500).json({ error: "Erreur interne" });
+  }
+}
+
+export async function getAllMessagesHandler(
+  req: Request,
+  res: Response,
+  next: NextFunction
+) {
+  try {
+    const messages = await getAllMessages();
     console.log("La récupération des messages a reussi :", messages);
 
     res.status(201).json(messages);
